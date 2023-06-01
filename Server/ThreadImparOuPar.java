@@ -8,14 +8,12 @@ import Util.MsgRequest;
 import Util.MsgResponse;
 
 public class ThreadImparOuPar extends Thread {
-    private int ganhou;
-    private int perdeu;
+
     private Socket cliente;
 
     public ThreadImparOuPar(Socket cliente) {
         this.cliente = cliente;
-        ganhou = 0;
-        perdeu = 0;
+
     }
 
     @Override
@@ -62,17 +60,16 @@ public class ThreadImparOuPar extends Thread {
             e.printStackTrace();
         }
 
-        synchronized (ThreadImparOuPar.class) {
-            System.out.println("Contador de vitórias: " + ganhou);
-            System.out.println("Contador de derrotas: " + perdeu);
-
-            if (ganhou > perdeu) {
+        synchronized (Server.class) {
+            System.out.println("Contador de vitórias: " + Server.vitorias);
+            System.out.println("Contador de derrotas: " + Server.derrotas);
+           
+           
+            if (Server.vitorias > Server.derrotas) {
                 System.out.println("O jogador ganhou!");
-            } else if (ganhou < perdeu) {
+            } else if (Server.vitorias < Server.derrotas) {
                 System.out.println("O computador ganhou!");
-            } else {
-                System.out.println("Empate!");
-            }
+            } 
         }
     }
 
@@ -82,11 +79,11 @@ public class ThreadImparOuPar extends Thread {
 
         if ((int) soma % 2 == 0) {
             System.out.println("A soma é par.");
-            ganhou++; // Incrementar o contador de vitórias
+            Server.vitorias++; // Incrementar o contador de vitórias
             return true;
         } else {
             System.out.println("A soma é ímpar.");
-            perdeu++; // Incrementar o contador de derrotas
+            Server.derrotas++; // Incrementar o contador de derrotas
             return false;
         }
     }
@@ -97,20 +94,16 @@ public class ThreadImparOuPar extends Thread {
         
         if ((int) soma % 2 != 0) {
             System.out.println("A soma é ímpar.");
-            ganhou++; // Incrementar o contador de vitórias
+            Server.vitorias++; // Incrementar o contador de vitórias
             return true;
         } else {
             System.out.println("A soma é par.");
-            perdeu++; // Incrementar o contador de derrotas
+            Server.derrotas++; // Incrementar o contador de derrotas
             return false;
         }
     }
-
-    public int getGanhou() {
-        return ganhou;
-    }
-
-    public int getPerdeu() {
-        return perdeu;
+    public static class Server {
+        public static int vitorias = 0;
+        public static int derrotas = 0;
     }
 }
