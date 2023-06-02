@@ -13,13 +13,18 @@ public class Cliente {
 
     public static void main(String[] args) {
         Socket socket;
-        int PORT = 12345;
-        String HOST = "localhost";
+;
         double value1;
         char escolha;
         String input;
         Scanner entrada = new Scanner(System.in);
+        System.out.print("Digite o HOST: ");
         
+        String HOST = entrada.nextLine();
+
+        System.out.print("Digite a PORTA: ");
+        int PORT = entrada.nextInt();
+        entrada.nextLine();
         
         try {
            while(true){

@@ -35,14 +35,14 @@ public class ThreadImparOuPar extends Thread {
             switch (escolha) {
                 case 'P':
                     resp = jogarPar(value2, valor1);
-                    response = new MsgResponse(null);
+                    response = new MsgResponse();
                     response.setResultado(resp  ? "Par" : "Ímpar");
                     out.writeObject(response);
                     break;
 
                 case 'I':
                     resp = jogarImpar(value2, valor1);
-                    response = new MsgResponse(null);
+                    response = new MsgResponse();
                     response.setResultado(resp  ? "Ímpar" : "Par");
                     out.writeObject(response);
                     break;
